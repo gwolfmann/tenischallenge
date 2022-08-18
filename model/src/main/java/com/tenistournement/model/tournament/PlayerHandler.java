@@ -15,7 +15,7 @@ public class PlayerHandler {
         return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue(MalePlayer.builder()
                                 .idPlayer("PL01")
-                                .name("jose raqueta")
+                                .name("Jose Raqueta")
                                 .ability(1)
                                 .strong(2)
                                 .velocity(3)
