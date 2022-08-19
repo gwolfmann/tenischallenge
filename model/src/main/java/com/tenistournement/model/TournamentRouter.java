@@ -1,7 +1,7 @@
 package com.tenistournement.model;
 
 import com.tenistournement.model.greeting.GreetingHandler;
-import com.tenistournement.model.tournament.PlayerHandler;
+import com.tenistournement.model.tournamentModel.PlayerHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;

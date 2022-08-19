@@ -1,6 +1,5 @@
-package com.tenistournement.model.tournament;
+package com.tenistournement.model.tournamentModel;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
 

@@ -1,4 +1,4 @@
-package com.tenistournement.model.tournament;
+package com.tenistournement.model.tournamentModel;
 
 import lombok.Data;
 

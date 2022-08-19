@@ -1,6 +1,5 @@
-package com.tenistournement.model.tournament;
+package com.tenistournement.model.tournamentModel;
 
-import com.tenistournement.model.greeting.Greeting;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserters;
