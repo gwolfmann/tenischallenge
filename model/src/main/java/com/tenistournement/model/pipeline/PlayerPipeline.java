@@ -2,13 +2,12 @@ package com.tenistournement.model.pipeline;
 
 import com.tenistournement.model.tournamentModel.MalePlayer;
 import com.tenistournement.model.tournamentModel.Player;
-import lombok.AllArgsConstructor;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.MediaType;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
+@Slf4j
 public class PlayerPipeline {
     private final Pipeline<Player,Player> pipeline;
 
@@ -34,6 +33,7 @@ public class PlayerPipeline {
         return Mono.just(player);
     }
     Mono<ServerResponse> responseOk(Player player){
+        log.info(player.toString());
         return ServerResponse.ok()
                 .bodyValue(player);
     }
