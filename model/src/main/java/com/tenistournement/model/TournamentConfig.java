@@ -1,7 +1,6 @@
 package com.tenistournement.model;
 
-import com.tenistournement.model.pipeline.PlayerPipeline;
-import com.tenistournement.model.tournamentModel.PlayerHandler;
+import com.tenistournement.model.pipeline.GetPlayerPipeline;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,8 +8,8 @@ import org.springframework.context.annotation.Configuration;
 public class TournamentConfig {
 
     @Bean
-    public PlayerPipeline playerPipeline(){
-        return new PlayerPipeline();
+    public GetPlayerPipeline playerPipeline(){
+        return new GetPlayerPipeline();
     }
 
 }

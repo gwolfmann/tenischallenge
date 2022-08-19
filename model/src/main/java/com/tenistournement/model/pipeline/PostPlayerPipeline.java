@@ -8,10 +8,10 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
 @Slf4j
-public class PlayerPipeline {
+public class PostPlayerPipeline {
     private final Pipeline<Player,Player> pipeline;
 
-    public PlayerPipeline(){
+    public PostPlayerPipeline(){
         pipeline = Pipeline.<Player, Player>builder()
                 .validateReq(Pipeline::noOperation)
                 .validateBody(Pipeline::noOperation)

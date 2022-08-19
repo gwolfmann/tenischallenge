@@ -1,10 +1,9 @@
 package com.tenistournement.model.tournamentModel;
 
-import com.tenistournement.model.pipeline.PlayerPipeline;
+import com.tenistournement.model.pipeline.GetPlayerPipeline;
+import com.tenistournement.model.pipeline.PostPlayerPipeline;
 import lombok.AllArgsConstructor;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
-import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
@@ -13,20 +12,15 @@ import reactor.core.publisher.Mono;
 @AllArgsConstructor
 public class PlayerHandler {
 
-    PlayerPipeline playerPipeline;
+    GetPlayerPipeline getPlayerPipeline;
+    PostPlayerPipeline postPlayerPipeline;
 
     public Mono<ServerResponse> player(ServerRequest request) {
-        return playerPipeline.execute(request);
-/*
-        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromValue(MalePlayer.builder()
-                                .idPlayer("PL01")
-                                .name("Jose Raqueta")
-                                .ability(1)
-                                .strong(2)
-                                .velocity(3)
-                        .build()));
-
- */
+        return getPlayerPipeline.execute(request);
     }
+
+    public Mono<ServerResponse> create(ServerRequest request) {
+        return postPlayerPipeline.execute(request);
+    }
+
 }
