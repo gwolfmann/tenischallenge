@@ -1,5 +1,6 @@
 package com.tenistournement.model;
 
+import com.tenistournement.model.pipeline.PlayerPipeline;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;

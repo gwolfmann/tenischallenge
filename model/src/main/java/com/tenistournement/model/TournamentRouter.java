@@ -17,7 +17,8 @@ public class TournamentRouter {
     @Bean
     public RouterFunction<ServerResponse> greeting(GreetingHandler greetingHandler) {
         return RouterFunctions
-                .route(GET("/hello").and(accept(MediaType.APPLICATION_JSON)), greetingHandler::hello);
+                .route(GET("/hello").and(accept(MediaType.APPLICATION_JSON)), greetingHandler::hello)
+                .andRoute(GET("/ping").and(accept(MediaType.APPLICATION_JSON)), greetingHandler::hello);
     }
 
     @Bean

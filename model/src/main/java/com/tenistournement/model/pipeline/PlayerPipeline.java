@@ -1,0 +1,50 @@
+package com.tenistournement.model.pipeline;
+
+import com.tenistournement.model.tournamentModel.MalePlayer;
+import com.tenistournement.model.tournamentModel.Player;
+import lombok.AllArgsConstructor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.MediaType;
+import org.springframework.web.reactive.function.server.ServerRequest;
+import org.springframework.web.reactive.function.server.ServerResponse;
+import reactor.core.publisher.Mono;
+
+public class PlayerPipeline {
+    private final Pipeline<Player,Player> pipeline;
+
+    public PlayerPipeline(){
+        pipeline = Pipeline.<Player, Player>builder()
+                .validateReq(Pipeline::noOperation)
+                .validateBody(Pipeline::noOperation)
+                .storageOp(this::getFromStorage)
+                .boProcessor(this::processRaw)
+                .presenter(this::responseOk)
+                .build();
+    }
+
+    public Mono<ServerResponse> execute(ServerRequest serverRequest){
+        return this.pipeline.execute(serverRequest);
+    }
+
+    Mono<Player> getFromStorage(ServerRequest serverRequest){
+        return Mono.just(this.testPlayer());
+    }
+
+    Mono<Player> processRaw(Player player){
+        return Mono.just(player);
+    }
+    Mono<ServerResponse> responseOk(Player player){
+        return ServerResponse.ok()
+                .bodyValue(player);
+    }
+
+    private Player testPlayer(){
+        return MalePlayer.builder()
+                .idPlayer("PL01")
+                .name("Jose Raqueta")
+                .ability(1)
+                .strong(2)
+                .velocity(3)
+                .build();
+    }
+}
