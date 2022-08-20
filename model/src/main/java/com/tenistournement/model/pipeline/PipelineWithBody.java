@@ -1,6 +1,7 @@
 package com.tenistournement.model.pipeline;
 
-import lombok.Builder;
+import lombok.Getter;
+import lombok.experimental.SuperBuilder;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
@@ -8,19 +9,16 @@ import reactor.util.context.Context;
 
 import java.util.function.Function;
 
-@Builder
-public class Pipeline<RAW,BO> {
+@SuperBuilder
+@Getter
+public class PipelineWithBody<BODY,RAW,BO> extends  Pipeline{
 
-    public static <BO> Mono<BO> noOperation(BO bo) {return Mono.just(bo);}
-
-    protected final Function<ServerRequest, Mono<ServerRequest>> validateReq;
+    private BODY body;
+    private final Class<BODY> bodyType;
     private final Function<ServerRequest, Mono<ServerRequest>> validateBody;
-    protected final Function<ServerRequest, Mono<RAW>> storageOp;
-    protected final Function<RAW, Mono<BO>> boProcessor;
-    protected final Function<BO, Mono<ServerResponse>> presenter;
-
+    @Override
     public Mono<ServerResponse> execute(ServerRequest serverRequest) {
-        return Mono.just(serverRequest)
+        return captureMono(serverRequest)
                 .flatMap(validateReq)
                 .flatMap(validateBody)
                 .flatMap(storageOp)
@@ -29,5 +27,13 @@ public class Pipeline<RAW,BO> {
                 .contextWrite(Context.of("key","value"));
     }
 
-
+    private Mono<ServerRequest> captureMono(ServerRequest serverRequest){
+        return Mono.just(serverRequest)
+                .flatMap(sr->sr.bodyToMono(bodyType))
+                .flatMap(body -> this.setBody(body,serverRequest));
+    }
+    private Mono<ServerRequest> setBody(BODY body, ServerRequest serverRequest){
+        this.body=body;
+        return Mono.just(serverRequest);
+    }
 }

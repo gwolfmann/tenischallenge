@@ -9,22 +9,28 @@ import reactor.core.publisher.Mono;
 
 @Slf4j
 public class PostPlayerPipeline {
-    private final Pipeline<Player,Player> pipeline;
+    private final PipelineWithBody<Player,Player,Player> playerPipelineWithBody;
 
     public PostPlayerPipeline(){
-        pipeline = Pipeline.<Player, Player>builder()
+        playerPipelineWithBody = PipelineWithBody.<Player,Player, Player>builder()
                 .validateReq(Pipeline::noOperation)
-                .validateBody(Pipeline::noOperation)
+                .validateBody(this::validateBody)
                 .storageOp(this::getFromStorage)
                 .boProcessor(this::processRaw)
                 .presenter(this::responseOk)
                 .build();
     }
 
-    public Mono<ServerResponse> execute(ServerRequest serverRequest){
-        return this.pipeline.execute(serverRequest);
+    public <PLAYER> Mono<ServerResponse> execute(ServerRequest serverRequest){
+        return this.playerPipelineWithBody.execute(serverRequest);
     }
 
+    Mono<ServerRequest> validateBody(ServerRequest serverRequest){
+        if (playerPipelineWithBody.getBody().getClass().toString().equals("Player")) {
+
+        }
+        return Mono.just(serverRequest);
+    }
     Mono<Player> getFromStorage(ServerRequest serverRequest){
         return Mono.just(this.testPlayer());
     }
