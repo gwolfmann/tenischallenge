@@ -1,5 +1,6 @@
 package com.tenistournement.model.pipeline;
 
+import com.tenistournement.model.responses.Responses;
 import com.tenistournement.model.tournamentModel.MalePlayer;
 import com.tenistournement.model.tournamentModel.PlayerDTO;
 import lombok.extern.slf4j.Slf4j;
@@ -43,6 +44,11 @@ public class PostPlayerPipeline {
         return Mono.just(serverRequest);
     }
     Mono<PlayerDTO> getFromStorage(ServerRequest serverRequest){
+        PlayerDTO playerDTO = playerPipelineWithBody.getBody();
+        if (playerDTO.getIdPlayer().equals("PL00")) {
+            log.error("Player de test");
+            return Mono.error(new Exception("Player de test"));
+        }
         return Mono.just(this.testPlayer());
     }
 
@@ -51,8 +57,7 @@ public class PostPlayerPipeline {
     }
     Mono<ServerResponse> responseOk(PlayerDTO player){
         log.info(player.toString());
-        return ServerResponse.ok()
-                .bodyValue(player);
+        return Responses.responseOk("player "+player.getName()+" incorporado");
     }
 
     private PlayerDTO testPlayer(){
