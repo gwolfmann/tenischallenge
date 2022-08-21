@@ -1,18 +1,23 @@
 package com.tenistournement.model.tournamentModel;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Builder;
 import lombok.Data;
-import lombok.experimental.SuperBuilder;
-import org.springframework.web.bind.annotation.RequestMapping;
+import lombok.ToString;
+
 
 @Data
+@ToString
 @JsonInclude
-@SuperBuilder
-public abstract class Player implements Performance{
+@Builder
+public class PlayerDTO {
 
         private String idPlayer;
         private String name;
         private Integer ability;
+        private Integer strong;
+        private Integer velocity;
+        private Integer reaction;
+        private Boolean isMale;
 
-        public abstract Float getPerformance();
 }

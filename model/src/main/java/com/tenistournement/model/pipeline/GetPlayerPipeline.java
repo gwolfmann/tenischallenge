@@ -1,7 +1,7 @@
 package com.tenistournement.model.pipeline;
 
 import com.tenistournement.model.tournamentModel.MalePlayer;
-import com.tenistournement.model.tournamentModel.Player;
+import com.tenistournement.model.tournamentModel.PlayerDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -9,10 +9,10 @@ import reactor.core.publisher.Mono;
 
 @Slf4j
 public class GetPlayerPipeline {
-    private final Pipeline<Player,Player> pipeline;
+    private final Pipeline<PlayerDTO, PlayerDTO> pipeline;
 
     public GetPlayerPipeline(){
-        pipeline = Pipeline.<Player, Player>builder()
+        pipeline = Pipeline.<PlayerDTO, PlayerDTO>builder()
                 .validateReq(Pipeline::noOperation)
                 .validateBody(Pipeline::noOperation)
                 .storageOp(this::getFromStorage)
@@ -25,26 +25,27 @@ public class GetPlayerPipeline {
         return this.pipeline.execute(serverRequest);
     }
 
-    Mono<Player> getFromStorage(ServerRequest serverRequest){
+    Mono<PlayerDTO> getFromStorage(ServerRequest serverRequest){
         return Mono.just(this.testPlayer());
     }
 
-    Mono<Player> processRaw(Player player){
+    Mono<PlayerDTO> processRaw(PlayerDTO player){
         return Mono.just(player);
     }
-    Mono<ServerResponse> responseOk(Player player){
+    Mono<ServerResponse> responseOk(PlayerDTO player){
         log.info(player.toString());
         return ServerResponse.ok()
                 .bodyValue(player);
     }
 
-    private Player testPlayer(){
-        return MalePlayer.builder()
+    private PlayerDTO testPlayer(){
+        return PlayerDTO.builder()
                 .idPlayer("PL01")
                 .name("Jose Raqueta")
                 .ability(1)
                 .strong(2)
                 .velocity(3)
+                .isMale(Boolean.TRUE)
                 .build();
     }
 }

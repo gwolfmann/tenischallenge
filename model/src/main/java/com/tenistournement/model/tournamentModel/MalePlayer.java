@@ -1,14 +1,18 @@
 package com.tenistournement.model.tournamentModel;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
-import lombok.experimental.SuperBuilder;
+
 
 @Data
-@ToString(callSuper = true)
-@SuperBuilder
-public class MalePlayer extends Player {
+@ToString
+@Builder
+public class MalePlayer implements Performance {
 
+    private String idPlayer;
+    private String name;
+    private Integer ability;
     private Integer strong;
     private Integer velocity;
 

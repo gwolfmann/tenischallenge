@@ -8,8 +8,8 @@ import java.util.Date;
 public class Tournament {
 
         private String idTournament;
-        private Player playerA;
-        private Player playerB;
+        private PlayerDTO playerA;
+        private PlayerDTO playerB;
         private Date date;
         private TenisSet[] sets;
         private Boolean absentA = false;

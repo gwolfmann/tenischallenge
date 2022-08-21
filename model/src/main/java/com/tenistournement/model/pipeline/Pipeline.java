@@ -14,7 +14,7 @@ public class Pipeline<RAW,BO> {
     public static <BO> Mono<BO> noOperation(BO bo) {return Mono.just(bo);}
 
     protected final Function<ServerRequest, Mono<ServerRequest>> validateReq;
-    private final Function<ServerRequest, Mono<ServerRequest>> validateBody;
+    protected final Function<ServerRequest, Mono<ServerRequest>> validateBody;
     protected final Function<ServerRequest, Mono<RAW>> storageOp;
     protected final Function<RAW, Mono<BO>> boProcessor;
     protected final Function<BO, Mono<ServerResponse>> presenter;

@@ -1,12 +1,16 @@
 package com.tenistournement.model.tournamentModel;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
 
 @Data
-@SuperBuilder
-public class FemalePlayer extends Player {
+@Builder
+public class FemalePlayer implements Performance {
 
+    private String idPlayer;
+    private String name;
+    private Integer ability;
     private Integer reaction;
 
     @Override

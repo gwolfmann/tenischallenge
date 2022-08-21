@@ -9,21 +9,27 @@ import reactor.util.context.Context;
 
 import java.util.function.Function;
 
-@SuperBuilder
 @Getter
-public class PipelineWithBody<BODY,RAW,BO> extends  Pipeline{
+@SuperBuilder
+public class PipelineWithBody<RAW,BO,BODY> {
 
     private BODY body;
-    private final Class<BODY> bodyType;
-    private final Function<ServerRequest, Mono<ServerRequest>> validateBody;
-    @Override
+    private Class<BODY> bodyType;
+    protected final Function<ServerRequest, Mono<ServerRequest>> validateReq;
+    protected final Function<ServerRequest, Mono<ServerRequest>> validateBody;
+    protected final Function<ServerRequest, Mono<RAW>> storageOp;
+    protected final Function<RAW, Mono<BO>> boProcessor;
+    protected final Function<BO, Mono<ServerResponse>> presenter;
+
     public Mono<ServerResponse> execute(ServerRequest serverRequest) {
-        return captureMono(serverRequest)
+        return  Mono.just(serverRequest)
                 .flatMap(validateReq)
+                .flatMap(this::captureMono)
                 .flatMap(validateBody)
                 .flatMap(storageOp)
                 .flatMap(boProcessor)
                 .flatMap(presenter)
+                .onErrorResume(e -> ServerResponse.ok().bodyValue(e.toString()))
                 .contextWrite(Context.of("key","value"));
     }
 

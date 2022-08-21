@@ -9,14 +9,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Match {
 
     private String idTournament;
-    private Player playerA;
-    private Player playerB;
+    private PlayerDTO playerA;
+    private PlayerDTO playerB;
     private Date date;
     private TenisSet[] sets;
     private Boolean absentA = false;
     private Boolean absentB = false;
 
-    public Player winner(){
+    public PlayerDTO winner(){
         AtomicInteger setsA=new AtomicInteger(0);
         AtomicInteger setsB=new AtomicInteger(0);
 
