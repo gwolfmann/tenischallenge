@@ -1,14 +1,20 @@
 package com.tenistournement.model.pipeline;
 
+import com.tenistournement.model.storageservice.PlayerOperation;
 import com.tenistournement.model.tournamentModel.MalePlayer;
 import com.tenistournement.model.tournamentModel.PlayerDTO;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
 @Slf4j
 public class GetPlayerPipeline {
+
+    @Autowired
+    PlayerOperation playerOperation;
+
     private final Pipeline<PlayerDTO, PlayerDTO> pipeline;
 
     public GetPlayerPipeline(){
@@ -26,7 +32,7 @@ public class GetPlayerPipeline {
     }
 
     Mono<PlayerDTO> getFromStorage(ServerRequest serverRequest){
-        return Mono.just(this.testPlayer());
+        return playerOperation.findById("PL01");
     }
 
     Mono<PlayerDTO> processRaw(PlayerDTO player){
@@ -38,14 +44,4 @@ public class GetPlayerPipeline {
                 .bodyValue(player);
     }
 
-    private PlayerDTO testPlayer(){
-        return PlayerDTO.builder()
-                .idPlayer("PL01")
-                .name("Jose Raqueta")
-                .ability(1)
-                .strong(2)
-                .velocity(3)
-                .isMale(Boolean.TRUE)
-                .build();
-    }
 }

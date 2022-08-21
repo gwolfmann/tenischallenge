@@ -1,15 +1,19 @@
 package com.tenistournement.model.pipeline;
 
 import com.tenistournement.model.responses.Responses;
+import com.tenistournement.model.storageservice.PlayerOperation;
 import com.tenistournement.model.tournamentModel.MalePlayer;
 import com.tenistournement.model.tournamentModel.PlayerDTO;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
 @Slf4j
 public class PostPlayerPipeline {
+    @Autowired
+    PlayerOperation playerOperation;
     private final PipelineWithBody<PlayerDTO, PlayerDTO, PlayerDTO> playerPipelineWithBody;
 
     public PostPlayerPipeline(){
@@ -49,7 +53,7 @@ public class PostPlayerPipeline {
             log.error("Player de test");
             return Mono.error(new Exception("Player de test"));
         }
-        return Mono.just(this.testPlayer());
+        return playerOperation.save(Mono.just(testPlayer()));
     }
 
     Mono<PlayerDTO> processRaw(PlayerDTO player){
