@@ -53,7 +53,7 @@ public class PostPlayerPipeline {
             log.error("Player de test");
             return Mono.error(new Exception("Player de test"));
         }
-        return playerOperation.save(Mono.just(testPlayer()));
+        return playerOperation.save(Mono.just(playerDTO));
     }
 
     Mono<PlayerDTO> processRaw(PlayerDTO player){
