@@ -14,16 +14,26 @@ import java.util.Date;
 @JsonInclude
 @Builder
 @Document
-
 public class Tournament {
+
+        private static String NULL_TOURNAMENT = "null";
+        public static Tournament nullTournament(String id){
+                return Tournament.builder()
+                        .idTournament(NULL_TOURNAMENT)
+                        .name(id)
+                        .build();
+        }
 
         @Id
         private String idTournament;
-        private PlayerDTO playerA;
-        private PlayerDTO playerB;
-        private Date date;
-        private TenisSet[] sets;
-        private Boolean absentA = false;
-        private Boolean absentB = false;
-        
+        private String name;
+        private Date initialDate;
+        private Date finalDate;
+        private PlayerDTO[] players;
+        private Match[] matches;
+
+        public Boolean isNull(){
+                return this.getIdTournament().equals(NULL_TOURNAMENT);
+        }
+
 }

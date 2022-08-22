@@ -2,6 +2,7 @@ package com.tenistournement.model;
 
 import com.tenistournement.model.greeting.GreetingHandler;
 import com.tenistournement.model.tournamentModel.PlayerHandler;
+import com.tenistournement.model.tournamentModel.TournamentHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -22,15 +23,16 @@ public class TournamentRouter {
     }
 
     @Bean
-    public RouterFunction<ServerResponse> getPlayer(PlayerHandler playerHandler) {
+    public RouterFunction<ServerResponse> playerRoutes(PlayerHandler playerHandler) {
         return RouterFunctions
                 .route(GET("/player/{playerId}").and(accept(MediaType.APPLICATION_JSON)), playerHandler::player)
                 .andRoute(POST("/player").and(accept(MediaType.APPLICATION_JSON)),playerHandler::create);
     }
 
     @Bean
-    public RouterFunction<ServerResponse> postPlayer(PlayerHandler playerHandler) {
+    public RouterFunction<ServerResponse> tournamentRoutes(TournamentHandler tournamentHandler) {
         return RouterFunctions
-                .route(POST("/player").and(accept(MediaType.APPLICATION_JSON)), playerHandler::player);
+                .route(GET("/tournament/{tournamentId}").and(accept(MediaType.APPLICATION_JSON)), tournamentHandler::tournament)
+                .andRoute(POST("/tournament").and(accept(MediaType.APPLICATION_JSON)),tournamentHandler::create);
     }
 }
