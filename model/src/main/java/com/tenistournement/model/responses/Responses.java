@@ -10,4 +10,8 @@ public class Responses {
     public static Mono<ServerResponse> responseInvalida(String mess){
         return ServerResponse.ok().bodyValue("Accion no ejecutada:"+mess);
     }
+
+    public static Mono<ServerResponse> responseNotFound(String mess){
+        return ServerResponse.ok().bodyValue("No encontrado:"+mess);
+    }
 }

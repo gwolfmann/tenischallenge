@@ -1,5 +1,6 @@
 package com.tenistournement.model.pipeline;
 
+import com.tenistournement.model.responses.Responses;
 import com.tenistournement.model.storageservice.PlayerOperation;
 import com.tenistournement.model.tournamentModel.MalePlayer;
 import com.tenistournement.model.tournamentModel.PlayerDTO;
@@ -32,13 +33,17 @@ public class GetPlayerPipeline {
     }
 
     Mono<PlayerDTO> getFromStorage(ServerRequest serverRequest){
-        return playerOperation.findById("PL01");
+        return playerOperation.findById(serverRequest.pathVariable("playerId"));
     }
 
     Mono<PlayerDTO> processRaw(PlayerDTO player){
         return Mono.just(player);
     }
     Mono<ServerResponse> responseOk(PlayerDTO player){
+        if (player.isNull()) {
+            log.info("codigo inexistente");
+            return Responses.responseNotFound(player.getName()+" player inexistente");
+        }
         log.info(player.toString());
         return ServerResponse.ok()
                 .bodyValue(player);

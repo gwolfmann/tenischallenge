@@ -14,6 +14,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Builder
 @Document
 public class PlayerDTO {
+        private static String NULL_PLAYER = "null";
+        public static PlayerDTO nullPlayer(String id){
+                return PlayerDTO.builder()
+                        .idPlayer(NULL_PLAYER)
+                        .name(id)
+                        .build();
+        }
+
         @Id
         private String idPlayer;
         private String name;
@@ -22,5 +30,9 @@ public class PlayerDTO {
         private Integer velocity;
         private Integer reaction;
         private Boolean isMale;
+
+        public Boolean isNull(){
+                return this.getIdPlayer().equals(NULL_PLAYER);
+        }
 
 }

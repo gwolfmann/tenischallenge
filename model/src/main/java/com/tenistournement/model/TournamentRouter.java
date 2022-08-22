@@ -24,7 +24,7 @@ public class TournamentRouter {
     @Bean
     public RouterFunction<ServerResponse> getPlayer(PlayerHandler playerHandler) {
         return RouterFunctions
-                .route(GET("/player").and(accept(MediaType.APPLICATION_JSON)), playerHandler::player)
+                .route(GET("/player/{playerId}").and(accept(MediaType.APPLICATION_JSON)), playerHandler::player)
                 .andRoute(POST("/player").and(accept(MediaType.APPLICATION_JSON)),playerHandler::create);
     }
 
