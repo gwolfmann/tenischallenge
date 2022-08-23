@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @ToString
@@ -30,7 +31,7 @@ public class Tournament {
         private Date initialDate;
         private Date finalDate;
         private PlayerDTO[] players;
-        private Match[] matches;
+        private List<Match> matches;
 
         public Boolean isNull(){
                 return this.getIdTournament().equals(NULL_TOURNAMENT);
