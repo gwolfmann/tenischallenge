@@ -1,15 +1,35 @@
 package com.tenistournement.model.tournamentModel;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Builder;
 import lombok.Data;
+import lombok.ToString;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
 
+
 @Data
+@ToString
+@JsonInclude
+@Builder
+@Document
 public class Match {
 
+    private static String NULL_MATCH = "null";
+    public static Match nullMatch(){
+        return Match.builder()
+                .idTournament(NULL_MATCH)
+                .build();
+    }
+
+
     private String idTournament;
+
     private PlayerDTO playerA;
+
     private PlayerDTO playerB;
     private Date date;
     private TenisSet[] sets;
@@ -34,5 +54,9 @@ public class Match {
             return playerA;
         }
         return playerB;
+    }
+
+    public Boolean isNull(){
+        return this.getIdTournament().equals(NULL_MATCH);
     }
 }

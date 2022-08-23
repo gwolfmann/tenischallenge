@@ -1,9 +1,6 @@
 package com.tenistournement.model;
 
-import com.tenistournement.model.pipeline.GetPlayerPipeline;
-import com.tenistournement.model.pipeline.GetTournamentPipeline;
-import com.tenistournement.model.pipeline.PostPlayerPipeline;
-import com.tenistournement.model.pipeline.PostTournamentPipeline;
+import com.tenistournement.model.pipeline.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -27,5 +24,12 @@ public class TournamentConfig {
         return new PostTournamentPipeline();
     }
 
+    @Bean
+    public GetMatchPipeline getMatchPipeline(){  return new GetMatchPipeline();
+    }
+    @Bean
+    public PostMatchPipeline postMatchPipeline(){
+        return new PostMatchPipeline();
+    }
 
 }
