@@ -35,8 +35,8 @@ public class GetMatchPipeline {
 
     Mono<Match> getFromStorage(ServerRequest serverRequest){
         return matchOperation.find(serverRequest.pathVariable("tournamentId"),
-                serverRequest.pathVariable("playerIdA"),
-                serverRequest.pathVariable("playerIdB"));
+                serverRequest.queryParams().getFirst("playerIdA"),
+                serverRequest.queryParams().getFirst("playerIdB"));
     }
 
     Mono<Match> processRaw(Match match){

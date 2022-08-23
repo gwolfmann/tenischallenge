@@ -21,8 +21,8 @@ public class MatchOperation {
     public Mono<Match> find(String id,String playerIdA, String playerIdB) {
         final Query query = Query.query(new Criteria().andOperator(
                 Criteria.where("idTournament").is(id),
-                        Criteria.where("playerA.getIdPlayer()").is(playerIdA),
-                        Criteria.where("playerB.getIdPlayer()").is(playerIdB)));
+                        Criteria.where("playerA.idPlayer").is(playerIdA),
+                        Criteria.where("playerB.idPlayer").is(playerIdB)));
         return reactiveMongoTemplate.findOne(query, Match.class)
                 .flatMap(pl -> Mono.justOrEmpty(pl))
                 .switchIfEmpty(Mono.just(Match.nullMatch()));
