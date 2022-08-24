@@ -30,11 +30,16 @@ public class Tournament {
         private String name;
         private Date initialDate;
         private Date finalDate;
-        private PlayerDTO[] players;
+        private List<PlayerDTO> players;
         private List<Match> matches;
 
         public Boolean isNull(){
                 return this.getIdTournament().equals(NULL_TOURNAMENT);
+        }
+
+        public List<PlayerDTO> addPlayers(List<PlayerDTO> newPlayers) {
+                getPlayers().addAll(newPlayers);
+                return getPlayers();
         }
 
 }

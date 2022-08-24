@@ -34,7 +34,9 @@ public class TournamentRouter {
     public RouterFunction<ServerResponse> tournamentRoutes(TournamentHandler tournamentHandler) {
         return RouterFunctions
                 .route(GET("/tournament/{tournamentId}").and(accept(MediaType.APPLICATION_JSON)), tournamentHandler::tournament)
-                .andRoute(POST("/tournament").and(accept(MediaType.APPLICATION_JSON)),tournamentHandler::create);
+                .andRoute(POST("/tournament").and(accept(MediaType.APPLICATION_JSON)),tournamentHandler::create)
+                .andRoute(POST("/registration/{tournamentId}").and(accept(MediaType.APPLICATION_JSON)),tournamentHandler::registration)
+                ;
     }
 
     @Bean

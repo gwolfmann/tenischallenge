@@ -23,6 +23,10 @@ public class TournamentConfig {
     public PostTournamentPipeline postTournamentPipeline(){
         return new PostTournamentPipeline();
     }
+    @Bean
+    public RegistrationTournamentPipeline registrationTournamentPipeline(){
+        return new RegistrationTournamentPipeline();
+    }
 
     @Bean
     public GetMatchPipeline getMatchPipeline(){  return new GetMatchPipeline();

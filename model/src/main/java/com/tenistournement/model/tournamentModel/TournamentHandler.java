@@ -2,6 +2,7 @@ package com.tenistournement.model.tournamentModel;
 
 import com.tenistournement.model.pipeline.GetTournamentPipeline;
 import com.tenistournement.model.pipeline.PostTournamentPipeline;
+import com.tenistournement.model.pipeline.RegistrationTournamentPipeline;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -14,6 +15,7 @@ public class TournamentHandler {
 
     GetTournamentPipeline getTournamentPipeline;
     PostTournamentPipeline postTournamentPipeline;
+    RegistrationTournamentPipeline registrationTournamentPipeline;
 
     public Mono<ServerResponse> tournament(ServerRequest request) {
         return getTournamentPipeline.execute(request);
@@ -21,6 +23,10 @@ public class TournamentHandler {
 
     public Mono<ServerResponse> create(ServerRequest request) {
         return postTournamentPipeline.execute(request);
+    }
+
+    public Mono<ServerResponse> registration(ServerRequest request) {
+        return registrationTournamentPipeline.execute(request);
     }
 
 }
