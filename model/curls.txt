@@ -1,0 +1,116 @@
+curl --location --request POST 'localhost:8080/player' \
+--header 'token: 123' \
+--header 'Content-Type: application/json' \
+--data-raw '{"name":"CASTRO Daniela","idPlayer":"PL101","isMale":false,"ability":4,"reaction":2}'
+curl --location --request POST 'localhost:8080/player' \
+--header 'token: 123' \
+--header 'Content-Type: application/json' \
+--data-raw '{"name":"WILLIAMS Gabriela","idPlayer":"PL102","isMale":false,"ability":6,"reaction":4}'
+curl --location --request POST 'localhost:8080/player' \
+--header 'token: 123' \
+--header 'Content-Type: application/json' \
+--data-raw '{"name":"SANCHEZ Venus","idPlayer":"PL103","isMale":false,"ability":1,"reaction":1}'
+curl --location --request POST 'localhost:8080/player' \
+--header 'token: 123' \
+--header 'Content-Type: application/json' \
+--data-raw '{"name":"SABATINI Arancha","idPlayer":"PL104","isMale":false,"ability":3,"reaction":2}'
+curl --location --request POST 'localhost:8080/player' \
+--header 'token: 123' \
+--header 'Content-Type: application/json' \
+--data-raw '{"name":"SHARAPOVA Conchita","idPlayer":"PL105","isMale":false,"ability":6,"reaction":1}'
+curl --location --request POST 'localhost:8080/player' \
+--header 'token: 123' \
+--header 'Content-Type: application/json' \
+--data-raw '{"name":"FEDERER Emma","idPlayer":"PL106","isMale":false,"ability":3,"reaction":7}'
+curl --location --request POST 'localhost:8080/player' \
+--header 'token: 123' \
+--header 'Content-Type: application/json' \
+--data-raw '{"name":"NADAL Ivana","idPlayer":"PL107","isMale":false,"ability":2,"reaction":4}'
+curl --location --request POST 'localhost:8080/player' \
+--header 'token: 123' \
+--header 'Content-Type: application/json' \
+--data-raw '{"name":"JONES Caroline","idPlayer":"PL108","isMale":false,"ability":2,"reaction":2}'
+curl --location --request POST 'localhost:8080/player' \
+--header 'token: 123' \
+--header 'Content-Type: application/json' \
+--data-raw '{"name":"KARPOV Jean","idPlayer":"PL201","isMale":true,"ability":2,"strong":1,"velocity":4}'
+curl --location --request POST 'localhost:8080/player' \
+--header 'token: 123' \
+--header 'Content-Type: application/json' \
+--data-raw '{"name":"JHONSON Luc","idPlayer":"PL202","isMale":true,"ability":3,"strong":2,"velocity":2}'
+curl --location --request POST 'localhost:8080/player' \
+--header 'token: 123' \
+--header 'Content-Type: application/json' \
+--data-raw '{"name":"MAYER Emile","idPlayer":"PL203","isMale":true,"ability":2,"strong":4,"velocity":5}'
+curl --location --request POST 'localhost:8080/player' \
+--header 'token: 123' \
+--header 'Content-Type: application/json' \
+--data-raw '{"name":"YAMAMOTO Juan","idPlayer":"PL204","isMale":true,"ability":5,"strong":1,"velocity":1}'
+curl --location --request POST 'localhost:8080/player' \
+--header 'token: 123' \
+--header 'Content-Type: application/json' \
+--data-raw '{"name":"DE BRUINE Ivan","idPlayer":"PL205","isMale":true,"ability":4,"strong":5,"velocity":1}'
+curl --location --request POST 'localhost:8080/player' \
+--header 'token: 123' \
+--header 'Content-Type: application/json' \
+--data-raw '{"name":"MARADONA Greg","idPlayer":"PL206","isMale":true,"ability":4,"strong":3,"velocity":5}'
+curl --location --request POST 'localhost:8080/player' \
+--header 'token: 123' \
+--header 'Content-Type: application/json' \
+--data-raw '{"name":"DOS SANTOS Joao","idPlayer":"PL207","isMale":true,"ability":2,"strong":3,"velocity":2}'
+curl --location --request POST 'localhost:8080/player' \
+--header 'token: 123' \
+--header 'Content-Type: application/json' \
+--data-raw '{"name":"CUSTEAU Johanes","idPlayer":"PL208","isMale":true,"ability":1,"strong":3,"velocity":4}'
+curl --location --request POST 'localhost:8080/tournament' \
+--header 'token: 123' \
+--header 'Content-Type: application/json' \
+--data-raw '{"name":"Cup Of Winners","idTournament":"TO01","initialDate":"2022-10-31","finalDate":"2022-11-06","players":[],"matches":[]}'
+curl --location --request POST 'localhost:8080/tournament' \
+--header 'token: 123' \
+--header 'Content-Type: application/json' \
+--data-raw '{"name":"Championshp of South","idTournament":"TO02","initialDate":"2022-11-03","finalDate":"2022-11-17","players":[],"matches":[]}'
+curl --location --request POST 'localhost:8080/registration/TO01' \
+--header 'token: 123' \
+--header 'Content-Type: application/json' \
+--data-raw '{"idTournament":"TO01",
+"players":[
+    {"name":"CASTRO Daniela","idPlayer":"PL101","isMale":false,"ability":4,"reaction":2},
+    {"name":"WILLIAMS Gabriela","idPlayer":"PL102","isMale":false,"ability":6,"reaction":4},
+    {"name":"SANCHEZ Venus","idPlayer":"PL103","isMale":false,"ability":1,"reaction":1},
+    {"name":"SABATINI Arancha","idPlayer":"PL104","isMale":false,"ability":3,"reaction":2}
+]
+}'
+curl --location --request POST 'localhost:8080/registration/TO01' \
+--header 'token: 123' \
+--header 'Content-Type: application/json' \
+--data-raw '{"idTournament":"TO01",
+"players":[
+   {"name":"SHARAPOVA Conchita","idPlayer":"PL105","isMale":false,"ability":6,"reaction":1},
+    {"name":"FEDERER Emma","idPlayer":"PL106","isMale":false,"ability":3,"reaction":7}
+]
+}'
+curl --location --request POST 'localhost:8080/registration/TO01' \
+--header 'token: 123' \
+--header 'Content-Type: application/json' \
+--data-raw '{"idTournament":"TO01",
+"players":[
+  {"name":"NADAL Ivana","idPlayer":"PL107","isMale":false,"ability":2,"reaction":4},
+  {"name":"JONES Caroline","idPlayer":"PL108","isMale":false,"ability":2,"reaction":2},
+  {"name":"KARPOV Jean","idPlayer":"PL201","isMale":true,"ability":2,"strong":1,"velocity":4},
+  {"name":"JHONSON Luc","idPlayer":"PL202","isMale":true,"ability":3,"strong":2,"velocity":2},
+  {"name":"MAYER Emile","idPlayer":"PL203","isMale":true,"ability":2,"strong":4,"velocity":5},
+  {"name":"YAMAMOTO Juan","idPlayer":"PL204","isMale":true,"ability":5,"strong":1,"velocity":1}
+]
+}'
+curl --location --request POST 'localhost:8080/registration/TO01' \
+--header 'token: 123' \
+--header 'Content-Type: application/json' \
+--data-raw '{"idTournament":"TO01",
+"players":[
+  {"name":"DE BRUINE Ivan","idPlayer":"PL205","isMale":true,"ability":4,"strong":5,"velocity":1},
+  {"name":"MARADONA Greg","idPlayer":"PL206","isMale":true,"ability":4,"strong":3,"velocity":5},
+  {"name":"DOS SANTOS Joao","idPlayer":"PL207","isMale":true,"ability":2,"strong":3,"velocity":2},
+{"name":"CUSTEAU Johanes","idPlayer":"PL208","isMale":true,"ability":1,"strong":3,"velocity":4}  
+]
+}'
