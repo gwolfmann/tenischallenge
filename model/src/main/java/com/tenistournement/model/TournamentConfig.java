@@ -36,4 +36,8 @@ public class TournamentConfig {
         return new PostMatchPipeline();
     }
 
+    @Bean
+    public NextRoundTournamentPipeline nextRoundTournamentPipeline(){
+        return new NextRoundTournamentPipeline();
+    }
 }
