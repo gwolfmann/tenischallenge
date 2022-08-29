@@ -45,13 +45,15 @@ public class Tournament {
                 getPlayers().addAll(newPlayers);
                 return getPlayers();
         }
-        public Tournament generateNextRound(){
+        public Tournament generateNextRound(Boolean isMale){
                 Integer maxLevelPresent = this.getMaxLevelPlayed();
                 List<PlayerDTO> winners = new ArrayList<>();
                 if (maxLevelPresent==0) {
-                    winners = this.getPlayers();
+                    winners = this.getPlayers().stream()
+                            .filter(playerDTO -> playerDTO.getIsMale().equals(isMale))
+                            .toList();
                 } else {
-                    winners = this.winnerOfLevel(maxLevelPresent);
+                    winners = this.winnerOfLevel(maxLevelPresent,isMale);
                 }
                 this.matches.addAll(this.defineMatches(winners,maxLevelPresent));
                 return this;
@@ -70,10 +72,11 @@ public class Tournament {
                         .reduce(0,(a,b)-> a > b? a :b);
         }
 
-        private List<PlayerDTO> winnerOfLevel(Integer level){
+        private List<PlayerDTO> winnerOfLevel(Integer level,Boolean isMale){
                 return matches.stream()
                         .filter(match -> match.getRound() == level)
                         .map(Match::winner)
+                        .filter(pl -> pl.getIsMale().equals(isMale))
                         .toList();
         }
 

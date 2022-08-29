@@ -35,7 +35,7 @@ public class TournamentRouter {
         return RouterFunctions
                 .route(GET("/tournament/{tournamentId}").and(accept(MediaType.APPLICATION_JSON)), tournamentHandler::tournament)
                 .andRoute(POST("/tournament").and(accept(MediaType.APPLICATION_JSON)),tournamentHandler::create)
-                .andRoute(GET("/generatematches/{tournamentId}").and(accept(MediaType.APPLICATION_JSON)),tournamentHandler::createNextRound)
+                .andRoute(GET("/generatematches/{tournamentId}{male}").and(accept(MediaType.APPLICATION_JSON)),tournamentHandler::createNextRound)
                 .andRoute(POST("/registration/{tournamentId}").and(accept(MediaType.APPLICATION_JSON)),tournamentHandler::registration)
                 ;
     }

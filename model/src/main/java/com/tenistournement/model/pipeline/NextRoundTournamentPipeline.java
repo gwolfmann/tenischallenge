@@ -32,17 +32,23 @@ public class NextRoundTournamentPipeline {
                 .build();
     }
 
+
     public Mono<ServerResponse> execute(ServerRequest serverRequest){
         return this.pipeline.execute(serverRequest);
     }
 
     Mono<Tournament> getFromStorage(ServerRequest serverRequest){
+        String maleParam = serverRequest.queryParams().getFirst("male");
+        if (!(maleParam.toLowerCase().equals("true") || maleParam.toLowerCase().equals("false"))) {
+            return Mono.error(new IllegalStateException("Parameter male must be true or false"));
+        }
+        Boolean isMale = Boolean.valueOf(maleParam);
         return tournamentOperation.findById(serverRequest.pathVariable("tournamentId"))
                 .flatMap(tournament -> {
                     if (tournament.hasUnplayedMatches())
                         return Mono.error(new IllegalStateException("El torneo tiene matches pendientes"));
                     else
-                        return Mono.just(tournament.generateNextRound());
+                        return Mono.just(tournament.generateNextRound(isMale));
                 });
     }
 
