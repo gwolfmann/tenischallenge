@@ -14,4 +14,9 @@ public class Responses {
     public static Mono<ServerResponse> responseNotFound(String mess){
         return ServerResponse.ok().bodyValue("No encontrado:"+mess);
     }
+
+    public static Mono<ServerResponse> responseUnplayedMatches(String mess){
+        return ServerResponse.ok().bodyValue("No encontrado:"+mess);
+    }
+
 }

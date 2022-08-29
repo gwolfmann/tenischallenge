@@ -2,12 +2,16 @@ package com.tenistournement.model.storageservice;
 
 import com.tenistournement.model.tournamentModel.Match;
 import com.tenistournement.model.tournamentModel.PlayerDTO;
+import com.tenistournement.model.tournamentModel.Tournament;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 @Service
 public class MatchOperation {
@@ -16,6 +20,11 @@ public class MatchOperation {
 
     public Mono<Match> save(Mono<Match> match){
         return reactiveMongoTemplate.save(match);
+    }
+
+    public Mono<Tournament> saveAll(Tournament tournament){
+        return reactiveMongoTemplate.insertAll(tournament.getMatches())
+                .then(Mono.just(tournament));
     }
 
     public Mono<Match> find(String id,String playerIdA, String playerIdB) {

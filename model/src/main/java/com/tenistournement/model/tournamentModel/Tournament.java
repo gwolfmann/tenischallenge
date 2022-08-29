@@ -5,15 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.aggregation.ArrayOperators;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 @Data
@@ -47,15 +45,28 @@ public class Tournament {
                 getPlayers().addAll(newPlayers);
                 return getPlayers();
         }
-        public void defineNextLevelMatches(){
+        public Tournament generateNextRound(){
                 Integer maxLevelPresent = this.getMaxLevelPlayed();
-                List<PlayerDTO> winners = this.winnerOfLevel(maxLevelPresent);
+                List<PlayerDTO> winners = new ArrayList<>();
+                if (maxLevelPresent==0) {
+                    winners = this.getPlayers();
+                } else {
+                    winners = this.winnerOfLevel(maxLevelPresent);
+                }
                 this.matches.addAll(this.defineMatches(winners,maxLevelPresent));
+                return this;
+        }
+
+        public Boolean hasUnplayedMatches(){
+                AtomicReference<Boolean> result = new AtomicReference<>(false);
+                matches.stream().forEach(match -> {
+                                result.set(result.get() || !match.played());});
+                return result.get();
         }
 
         private Integer getMaxLevelPlayed(){
                 return matches.stream()
-                        .map(match -> match.played() ? match.getRound() : -1)
+                        .map(match -> match.played() ? match.getRound() : 0)
                         .reduce(0,(a,b)-> a > b? a :b);
         }
 
@@ -74,7 +85,7 @@ public class Tournament {
                         .plusDays(1).atZone(ZoneId.systemDefault()).toInstant());
                 List<Match> result = new ArrayList<>();
                 List<List<PlayerDTO>> listOfPlayers = players.stream().collect(Collectors
-                        .partitioningBy(p -> players.indexOf(p)>qOfPlayers))
+                        .partitioningBy(p -> players.indexOf(p)<qOfPlayers))
                         .values()
                         .stream().toList();
                 for (int i =0 ;i< qOfPlayers; i++) {

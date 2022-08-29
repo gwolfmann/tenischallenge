@@ -29,7 +29,7 @@ public class PipelineWithBody<RAW,BO,BODY> {
                 .flatMap(storageOp)
                 .flatMap(boProcessor)
                 .flatMap(presenter)
-                .onErrorResume(e -> ServerResponse.ok().bodyValue(e.toString()))
+                .onErrorResume(e -> ServerResponse.accepted().bodyValue(e.toString()))
                 .contextWrite(Context.of("key","value"));
     }
 

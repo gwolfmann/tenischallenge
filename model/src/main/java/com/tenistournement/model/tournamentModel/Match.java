@@ -36,9 +36,9 @@ public class Match {
     private Date date;
     private Integer round;
     private List<TenisSet> sets;
-    @Value("${some.key:false}")
+   // @Value("${some.key:false}")
     private Boolean absentA;
-    @Value("${some.key:false}")
+   // @Value("${some.key:false}")
     private Boolean absentB;
 
     public PlayerDTO winner(){
@@ -66,6 +66,14 @@ public class Match {
     }
 
     public Boolean played(){
-        return absentA || absentB || sets.size()>0;
+        return absentA() || absentB() || sets!=null;
+    }
+
+    private Boolean absentA() {
+        return !(null == absentA || !absentA);
+    }
+
+    private Boolean absentB() {
+        return !(null == absentB || !absentB);
     }
 }

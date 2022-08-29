@@ -26,6 +26,7 @@ public class Pipeline<RAW,BO> {
                 .flatMap(storageOp)
                 .flatMap(boProcessor)
                 .flatMap(presenter)
+                .onErrorResume((e) -> ServerResponse.accepted().bodyValue(e.getMessage()))
                 .contextWrite(Context.of("key","value"));
     }
 
