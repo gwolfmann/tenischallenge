@@ -13,6 +13,14 @@ public class FemalePlayer implements Performance {
     private Integer ability;
     private Integer reaction;
 
+    public static FemalePlayer from(PlayerDTO playerDTO){
+        return FemalePlayer.builder()
+                .idPlayer(playerDTO.getIdPlayer())
+                .name(playerDTO.getName())
+                .ability(playerDTO.getAbility())
+                .reaction(playerDTO.getReaction())
+                .build();
+    }
     @Override
     public Float getPerformance() {
         return (float) (getAbility() +

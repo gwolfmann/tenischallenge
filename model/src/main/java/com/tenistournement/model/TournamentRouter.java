@@ -36,6 +36,7 @@ public class TournamentRouter {
                 .route(GET("/tournament/{tournamentId}").and(accept(MediaType.APPLICATION_JSON)), tournamentHandler::tournament)
                 .andRoute(POST("/tournament").and(accept(MediaType.APPLICATION_JSON)),tournamentHandler::create)
                 .andRoute(GET("/generatematches/{tournamentId}{male}").and(accept(MediaType.APPLICATION_JSON)),tournamentHandler::createNextRound)
+                .andRoute(GET("/simulatematches/{tournamentId}").and(accept(MediaType.APPLICATION_JSON)),tournamentHandler::simulatePlay)
                 .andRoute(POST("/registration/{tournamentId}").and(accept(MediaType.APPLICATION_JSON)),tournamentHandler::registration)
                 ;
     }

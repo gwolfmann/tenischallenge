@@ -35,4 +35,11 @@ public class PlayerDTO {
                 return this.getIdPlayer().equals(NULL_PLAYER);
         }
 
+        public float getPerformance(){
+                if (isMale) {
+                        return MalePlayer.from(this).getPerformance();
+                }
+                return FemalePlayer.from(this).getPerformance();
+        }
+
 }

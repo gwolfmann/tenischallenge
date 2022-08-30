@@ -65,8 +65,43 @@ public class Match {
         return this.getIdTournament().equals(NULL_MATCH);
     }
 
+    public Boolean isMale(){
+        return this.playerA.getIsMale();
+    }
     public Boolean played(){
         return absentA() || absentB() || sets!=null;
+    }
+
+    public void simulatePlay(){
+        final float perfA = getPlayerA().getPerformance();
+        final float perfB = getPlayerB().getPerformance();
+        final float weightA = perfA / (perfA + perfB);
+        //final float weightB = perfB / (perfA + perfB);
+        final double rand = Math.random();
+        final Boolean winnerA = (weightA + rand) >= 1 ;
+        if (winnerA) {
+            this.sets.add(TenisSet.builder()
+                    .gamesA(6)
+                    .gamesB(1)
+                    .build());
+            this.sets.add(TenisSet.builder()
+                    .gamesA(6)
+                    .gamesB(4)
+                    .build());
+        } else {
+            this.sets.add(TenisSet.builder()
+                    .gamesA(4)
+                    .gamesB(6)
+                    .build());
+            this.sets.add(TenisSet.builder()
+                    .gamesA(6)
+                    .gamesB(3)
+                    .build());
+            this.sets.add(TenisSet.builder()
+                    .gamesA(1)
+                    .gamesB(6)
+                    .build());
+        }
     }
 
     private Boolean absentA() {

@@ -40,4 +40,9 @@ public class TournamentConfig {
     public NextRoundTournamentPipeline nextRoundTournamentPipeline(){
         return new NextRoundTournamentPipeline();
     }
+    @Bean
+    public SimulatePlayPipeline simulatePlayPipeline(){
+        return new SimulatePlayPipeline();
+    }
+
 }

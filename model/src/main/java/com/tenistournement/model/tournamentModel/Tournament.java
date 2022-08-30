@@ -59,9 +59,11 @@ public class Tournament {
                 return this;
         }
 
-        public Boolean hasUnplayedMatches(){
+        public Boolean hasUnplayedMatches(Boolean isMale){
                 AtomicReference<Boolean> result = new AtomicReference<>(false);
-                matches.stream().forEach(match -> {
+                matches.stream()
+                        .filter(match -> match.isMale()==isMale)
+                        .forEach(match -> {
                                 result.set(result.get() || !match.played());});
                 return result.get();
         }

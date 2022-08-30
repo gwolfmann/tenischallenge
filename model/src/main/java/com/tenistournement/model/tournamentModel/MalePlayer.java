@@ -16,6 +16,16 @@ public class MalePlayer implements Performance {
     private Integer strong;
     private Integer velocity;
 
+    public static MalePlayer from(PlayerDTO playerDTO){
+        return MalePlayer.builder()
+                .idPlayer(playerDTO.getIdPlayer())
+                .name(playerDTO.getName())
+                .ability(playerDTO.getAbility())
+                .strong(playerDTO.getStrong())
+                .velocity(playerDTO.getVelocity())
+                .build();
+    }
+
     @Override
     public Float getPerformance() {
         return (float) (getAbility() * 1.0 +
