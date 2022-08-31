@@ -3,13 +3,11 @@ package com.tenistournement.model.pipeline;
 import com.tenistournement.model.responses.Responses;
 import com.tenistournement.model.storageservice.MatchOperation;
 import com.tenistournement.model.storageservice.TournamentOperation;
-import com.tenistournement.model.tournamentModel.Match;
 import com.tenistournement.model.tournamentModel.Tournament;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Slf4j
@@ -34,12 +32,13 @@ public class NextRoundTournamentPipeline {
 
 
     public Mono<ServerResponse> execute(ServerRequest serverRequest){
-        return this.pipeline.execute(serverRequest);
+        return this.pipeline.execute(serverRequest)
+                .onErrorResume(e -> ServerResponse.accepted().bodyValue(e.getMessage()));
     }
 
     Mono<Tournament> getFromStorage(ServerRequest serverRequest){
         String maleParam = serverRequest.queryParams().getFirst("male");
-        if (!(maleParam.toLowerCase().equals("true") || maleParam.toLowerCase().equals("false"))) {
+        if (!(maleParam.equalsIgnoreCase("true") || maleParam.equalsIgnoreCase("false"))) {
             return Mono.error(new IllegalStateException("Parameter male must be true or false"));
         }
         Boolean isMale = Boolean.valueOf(maleParam);

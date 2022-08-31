@@ -89,8 +89,11 @@ public class Tournament {
                         .toList();
         }
 
-        private List<Match> defineMatches(List<PlayerDTO> players, Integer level){
-                assert (players.size()>0 && players.size()%2==0);
+        private List<Match> defineMatches(List<PlayerDTO> players, Integer level) throws IllegalStateException {
+                if (!(players.size()>0 && players.size()%2==0)) {
+                        throw new IllegalStateException("El torneo tiene "+
+                                players.size() +" players en disputa");
+                }
                 Integer qOfPlayers = players.size()/2;
                 Date dayOfMatch = Date.from(this.initialDate.toInstant()
                         .atZone(ZoneId.systemDefault()).toLocalDateTime()
