@@ -114,3 +114,9 @@ curl --location --request POST 'localhost:8080/registration/TO01' \
 {"name":"CUSTEAU Johanes","idPlayer":"PL208","isMale":true,"ability":1,"strong":3,"velocity":4}  
 ]
 }'
+curl --location --request GET 'localhost:8080/generatematches/TO01?male=true' \
+--header 'token: 123' \
+--data-raw ''
+curl --location --request GET 'localhost:8080/simulatematches/TO01?male=true' \
+--header 'token: 123' \
+--data-raw ''
