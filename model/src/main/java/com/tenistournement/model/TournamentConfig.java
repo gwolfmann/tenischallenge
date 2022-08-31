@@ -50,4 +50,8 @@ public class TournamentConfig {
         return new QueryMatchPipeline();
     }
 
+    @Bean
+    public QueryTournamentPipeline queryTournamentPipeline(){
+        return new QueryTournamentPipeline();
+    }
 }

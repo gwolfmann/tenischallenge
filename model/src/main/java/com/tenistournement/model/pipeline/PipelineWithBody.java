@@ -2,6 +2,7 @@ package com.tenistournement.model.pipeline;
 
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
@@ -35,8 +36,10 @@ public class PipelineWithBody<RAW,BO,BODY> {
 
     private Mono<ServerRequest> captureMono(ServerRequest serverRequest){
         return Mono.just(serverRequest)
+                .filter( sr -> sr.method()== HttpMethod.POST)
                 .flatMap(sr->sr.bodyToMono(bodyType))
-                .flatMap(body -> this.setBody(body,serverRequest));
+                .flatMap(body -> this.setBody(body,serverRequest))
+                .switchIfEmpty(Mono.just(serverRequest));
     }
     private Mono<ServerRequest> setBody(BODY body, ServerRequest serverRequest){
         this.body=body;

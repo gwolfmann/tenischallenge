@@ -52,6 +52,7 @@ public class TournamentRouter {
     @Bean
     public RouterFunction<ServerResponse> queryMatchesRoutes(QueryHandler queryHandler) {
         return RouterFunctions
-                .route(GET("/query/{playerId}").and(accept(MediaType.APPLICATION_JSON)), queryHandler::matchesByPlayer);
+                .route(GET("/queryPlayer/{playerId}").and(accept(MediaType.APPLICATION_JSON)), queryHandler::matchesByPlayer)
+                .andRoute(GET("/queryTournament/{tournamentId}").and(accept(MediaType.APPLICATION_JSON)), queryHandler::tournamentResult);
     }
 }

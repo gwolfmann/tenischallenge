@@ -8,9 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
@@ -116,6 +114,35 @@ public class Tournament {
                                 .build());
                 }
                 return result;
+        }
+
+        public List<PlayerBestResultInTournament> getScores(){
+                Map<String, PlayerBestResultInTournament> map = new HashMap<>();
+                getMatches().stream()
+                        .sorted(Comparator.comparing(Match::getRound))  //match sort by round
+                        .forEach(m->{
+                                map.put(m.getPlayerA().getIdPlayer(),  //insert bestResult for player A
+                                PlayerBestResultInTournament
+                                .builder()
+                                        .idPlayer(m.getPlayerA().getIdPlayer())
+                                        .name(m.getPlayerA().getName())
+                                        .round(m.getRound())
+                                        .win(m.winner().equals(m.getPlayerA()))
+                                        .build());
+                                map.put(m.getPlayerB().getIdPlayer(), //insert bestResult for player B
+                                        PlayerBestResultInTournament
+                                                .builder()
+                                                .idPlayer(m.getPlayerB().getIdPlayer())
+                                                .name(m.getPlayerB().getName())
+                                                .round(m.getRound())
+                                                .win(m.winner().equals(m.getPlayerB()))
+                                                .build());
+                        });  //last inserted value for a player is it's best result
+                return  map.entrySet().stream() //sort the maps entries by round and win
+                        .map(Map.Entry::getValue)
+                        .sorted(Comparator.comparing(PlayerBestResultInTournament::getRound)
+                                .thenComparing(Comparator.comparing(PlayerBestResultInTournament::getWin)))
+                        .toList();
         }
 
 }
