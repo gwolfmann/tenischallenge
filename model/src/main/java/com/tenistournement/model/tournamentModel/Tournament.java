@@ -46,7 +46,7 @@ public class Tournament {
                 return getPlayers();
         }
         public Tournament generateNextRound(Boolean isMale){
-                Integer maxLevelPresent = this.getMaxLevelPlayed();
+                Integer maxLevelPresent = this.getMaxLevelPlayed(isMale);
                 List<PlayerDTO> winners = new ArrayList<>();
                 if (maxLevelPresent==0) {
                     winners = this.getPlayers().stream()
@@ -63,20 +63,27 @@ public class Tournament {
                 AtomicReference<Boolean> result = new AtomicReference<>(false);
                 matches.stream()
                         .filter(match -> match.isMale()==isMale)
-                        .forEach(match -> {
-                                result.set(result.get() || !match.played());});
+                        .forEach(match -> result.set(result.get() || !match.played()));
                 return result.get();
         }
 
-        private Integer getMaxLevelPlayed(){
+        public Tournament simulatePlay(Boolean isMale){
+                this.matches.stream()
+                        .filter(match -> match.isMale()==isMale && !match.played())
+                        .forEach(Match::simulatePlay);
+                return this;
+        }
+
+        private Integer getMaxLevelPlayed(Boolean isMale){
                 return matches.stream()
+                        .filter(match -> match.isMale()==isMale)
                         .map(match -> match.played() ? match.getRound() : 0)
                         .reduce(0,(a,b)-> a > b? a :b);
         }
 
         private List<PlayerDTO> winnerOfLevel(Integer level,Boolean isMale){
                 return matches.stream()
-                        .filter(match -> match.getRound() == level)
+                        .filter(match -> match.getRound().equals(level))
                         .map(Match::winner)
                         .filter(pl -> pl.getIsMale().equals(isMale))
                         .toList();
@@ -100,6 +107,9 @@ public class Tournament {
                                 .playerA(listOfPlayers.get(0).get(i))
                                 .playerB(listOfPlayers.get(1).get(qOfPlayers-1-i))
                                 .round(level+1)
+                                .sets(new ArrayList<>())
+                                .absentA(false)
+                                .absentB(false)
                                 .build());
                 }
                 return result;

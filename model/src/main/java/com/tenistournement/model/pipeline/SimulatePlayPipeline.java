@@ -37,22 +37,23 @@ public class SimulatePlayPipeline {
 
     Mono<Tournament> getFromStorage(ServerRequest serverRequest){
         String maleParam = serverRequest.queryParams().getFirst("male");
-        if (!(maleParam.toLowerCase().equals("true") || maleParam.toLowerCase().equals("false"))) {
+        if (!(maleParam.equalsIgnoreCase("true") || maleParam.equalsIgnoreCase("false"))) {
             return Mono.error(new IllegalStateException("Parameter male must be true or false"));
         }
         Boolean isMale = Boolean.valueOf(maleParam);
         return tournamentOperation.findById(serverRequest.pathVariable("tournamentId"))
                 .flatMap(tournament -> {
-                    if (tournament.hasUnplayedMatches(isMale))
-                        return Mono.error(new IllegalStateException("El torneo tiene matches pendientes"));
+                    if (!tournament.hasUnplayedMatches(isMale))
+                        return Mono.error(new IllegalStateException("El torneo no tiene matches pendientes"));
                     else
-                        return Mono.just(tournament.generateNextRound(isMale));
+                        return Mono.just(tournament.simulatePlay(isMale));
                 });
     }
 
     Mono<Tournament> processRaw(Tournament tournament){
         return matchOperation.saveAll(tournament);
     }
+
     Mono<ServerResponse> responseOk(Tournament tournament){
         if (tournament.isNull()) {
             log.info("codigo inexistente");
@@ -60,7 +61,7 @@ public class SimulatePlayPipeline {
         }
         log.info(tournament.toString());
         return ServerResponse.ok()
-                .bodyValue(tournament);
+                .bodyValue(tournament.getMatches());
     }
 
 }

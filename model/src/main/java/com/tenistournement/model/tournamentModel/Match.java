@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -29,16 +27,12 @@ public class Match {
 
 
     private String idTournament;
-
     private PlayerDTO playerA;
-
     private PlayerDTO playerB;
     private Date date;
     private Integer round;
     private List<TenisSet> sets;
-   // @Value("${some.key:false}")
     private Boolean absentA;
-   // @Value("${some.key:false}")
     private Boolean absentB;
 
     public PlayerDTO winner(){
@@ -69,7 +63,7 @@ public class Match {
         return this.playerA.getIsMale();
     }
     public Boolean played(){
-        return absentA() || absentB() || sets!=null;
+        return getAbsentA() || getAbsentB() || getSets().size()>0;
     }
 
     public void simulatePlay(){
@@ -104,11 +98,13 @@ public class Match {
         }
     }
 
-    private Boolean absentA() {
+   /* private Boolean absentA() {
         return !(null == absentA || !absentA);
     }
 
     private Boolean absentB() {
         return !(null == absentB || !absentB);
     }
+
+    */
 }
