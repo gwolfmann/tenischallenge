@@ -9,6 +9,8 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
 @Service
 public class MatchOperation {
     @Autowired
@@ -34,6 +36,14 @@ public class MatchOperation {
         return reactiveMongoTemplate.findOne(query, Match.class)
                 .flatMap(Mono::justOrEmpty)
                 .switchIfEmpty(Mono.just(Match.nullMatch()));
+    }
+
+    public Mono<List<Match>> findAll(String playerId) {
+        final Query query = Query.query(new Criteria().orOperator(
+                Criteria.where("playerA.idPlayer").is(playerId),
+                Criteria.where("playerB.idPlayer").is(playerId)));
+        return reactiveMongoTemplate.find(query, Match.class)
+                .collectList();
     }
 
 }

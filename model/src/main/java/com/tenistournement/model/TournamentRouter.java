@@ -4,6 +4,7 @@ import com.tenistournement.model.greeting.GreetingHandler;
 import com.tenistournement.model.tournamentModel.MatchHandler;
 import com.tenistournement.model.tournamentModel.PlayerHandler;
 import com.tenistournement.model.tournamentModel.TournamentHandler;
+import com.tenistournement.model.tournamentModel.QueryHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -46,5 +47,11 @@ public class TournamentRouter {
         return RouterFunctions
                 .route(GET("/match/{tournamentId}{playerIdA}{playerIdB}").and(accept(MediaType.APPLICATION_JSON)), matchHandler::match)
                 .andRoute(POST("/match").and(accept(MediaType.APPLICATION_JSON)),matchHandler::create);
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> queryMatchesRoutes(QueryHandler queryHandler) {
+        return RouterFunctions
+                .route(GET("/query/{playerId}").and(accept(MediaType.APPLICATION_JSON)), queryHandler::matchesByPlayer);
     }
 }

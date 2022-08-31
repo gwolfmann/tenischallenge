@@ -45,4 +45,9 @@ public class TournamentConfig {
         return new SimulatePlayPipeline();
     }
 
+    @Bean
+    public QueryMatchPipeline queryPipeline(){
+        return new QueryMatchPipeline();
+    }
+
 }
