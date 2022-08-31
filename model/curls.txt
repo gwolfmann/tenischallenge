@@ -120,3 +120,9 @@ curl --location --request GET 'localhost:8080/generatematches/TO01?male=true' \
 curl --location --request GET 'localhost:8080/simulatematches/TO01?male=true' \
 --header 'token: 123' \
 --data-raw ''
+curl --location --request GET 'localhost:8080/queryPlayer/PL206' \
+--header 'token: 123' \
+--data-raw ''
+curl --location --request GET 'localhost:8080/queryTournament/TO01' \
+--header 'token: 123' \
+--data-raw ''
