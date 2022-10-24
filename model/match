@@ -1,0 +1,333 @@
+[{
+  "_id": {
+    "$oid": "630eac05da00264aedb0d896"
+  },
+  "idTournament": "TO01",
+  "playerA": {
+    "_id": "PL205",
+    "name": "DE BRUINE Ivan",
+    "ability": 4,
+    "strong": 5,
+    "velocity": 1,
+    "isMale": true
+  },
+  "playerB": {
+    "_id": "PL204",
+    "name": "YAMAMOTO Juan",
+    "ability": 5,
+    "strong": 1,
+    "velocity": 1,
+    "isMale": true
+  },
+  "date": {
+    "$date": {
+      "$numberLong": "1667260800000"
+    }
+  },
+  "round": 1,
+  "sets": [
+    {
+      "gamesA": 4,
+      "gamesB": 6
+    },
+    {
+      "gamesA": 6,
+      "gamesB": 3
+    },
+    {
+      "gamesA": 1,
+      "gamesB": 6
+    }
+  ],
+  "absentA": false,
+  "absentB": false,
+  "_class": "com.tenistournement.model.tournamentModel.Match"
+},{
+  "_id": {
+    "$oid": "630eac05da00264aedb0d897"
+  },
+  "idTournament": "TO01",
+  "playerA": {
+    "_id": "PL206",
+    "name": "MARADONA Greg",
+    "ability": 4,
+    "strong": 3,
+    "velocity": 5,
+    "isMale": true
+  },
+  "playerB": {
+    "_id": "PL203",
+    "name": "MAYER Emile",
+    "ability": 2,
+    "strong": 4,
+    "velocity": 5,
+    "isMale": true
+  },
+  "date": {
+    "$date": {
+      "$numberLong": "1667260800000"
+    }
+  },
+  "round": 1,
+  "sets": [
+    {
+      "gamesA": 6,
+      "gamesB": 1
+    },
+    {
+      "gamesA": 6,
+      "gamesB": 4
+    }
+  ],
+  "absentA": false,
+  "absentB": false,
+  "_class": "com.tenistournement.model.tournamentModel.Match"
+},{
+  "_id": {
+    "$oid": "630eac05da00264aedb0d898"
+  },
+  "idTournament": "TO01",
+  "playerA": {
+    "_id": "PL207",
+    "name": "DOS SANTOS Joao",
+    "ability": 2,
+    "strong": 3,
+    "velocity": 2,
+    "isMale": true
+  },
+  "playerB": {
+    "_id": "PL202",
+    "name": "JHONSON Luc",
+    "ability": 3,
+    "strong": 2,
+    "velocity": 2,
+    "isMale": true
+  },
+  "date": {
+    "$date": {
+      "$numberLong": "1667260800000"
+    }
+  },
+  "round": 1,
+  "sets": [
+    {
+      "gamesA": 4,
+      "gamesB": 6
+    },
+    {
+      "gamesA": 6,
+      "gamesB": 3
+    },
+    {
+      "gamesA": 1,
+      "gamesB": 6
+    }
+  ],
+  "absentA": false,
+  "absentB": false,
+  "_class": "com.tenistournement.model.tournamentModel.Match"
+},{
+  "_id": {
+    "$oid": "630eac05da00264aedb0d899"
+  },
+  "idTournament": "TO01",
+  "playerA": {
+    "_id": "PL208",
+    "name": "CUSTEAU Johanes",
+    "ability": 1,
+    "strong": 3,
+    "velocity": 4,
+    "isMale": true
+  },
+  "playerB": {
+    "_id": "PL201",
+    "name": "KARPOV Jean",
+    "ability": 2,
+    "strong": 1,
+    "velocity": 4,
+    "isMale": true
+  },
+  "date": {
+    "$date": {
+      "$numberLong": "1667260800000"
+    }
+  },
+  "round": 1,
+  "sets": [
+    {
+      "gamesA": 4,
+      "gamesB": 6
+    },
+    {
+      "gamesA": 6,
+      "gamesB": 3
+    },
+    {
+      "gamesA": 1,
+      "gamesB": 6
+    }
+  ],
+  "absentA": false,
+  "absentB": false,
+  "_class": "com.tenistournement.model.tournamentModel.Match"
+},{
+  "_id": {
+    "$oid": "630eac05da00264aedb0d89a"
+  },
+  "idTournament": "TO01",
+  "playerA": {
+    "_id": "PL105",
+    "name": "SHARAPOVA Conchita",
+    "ability": 6,
+    "reaction": 1,
+    "isMale": false
+  },
+  "playerB": {
+    "_id": "PL104",
+    "name": "SABATINI Arancha",
+    "ability": 3,
+    "reaction": 2,
+    "isMale": false
+  },
+  "date": {
+    "$date": {
+      "$numberLong": "1667260800000"
+    }
+  },
+  "round": 1,
+  "sets": [
+    {
+      "gamesA": 4,
+      "gamesB": 6
+    },
+    {
+      "gamesA": 6,
+      "gamesB": 3
+    },
+    {
+      "gamesA": 1,
+      "gamesB": 6
+    }
+  ],
+  "absentA": false,
+  "absentB": false,
+  "_class": "com.tenistournement.model.tournamentModel.Match"
+},{
+  "_id": {
+    "$oid": "630eac05da00264aedb0d89b"
+  },
+  "idTournament": "TO01",
+  "playerA": {
+    "_id": "PL106",
+    "name": "FEDERER Emma",
+    "ability": 3,
+    "reaction": 7,
+    "isMale": false
+  },
+  "playerB": {
+    "_id": "PL103",
+    "name": "SANCHEZ Venus",
+    "ability": 1,
+    "reaction": 1,
+    "isMale": false
+  },
+  "date": {
+    "$date": {
+      "$numberLong": "1667260800000"
+    }
+  },
+  "round": 1,
+  "sets": [
+    {
+      "gamesA": 6,
+      "gamesB": 1
+    },
+    {
+      "gamesA": 6,
+      "gamesB": 4
+    }
+  ],
+  "absentA": false,
+  "absentB": false,
+  "_class": "com.tenistournement.model.tournamentModel.Match"
+},{
+  "_id": {
+    "$oid": "630eac05da00264aedb0d89c"
+  },
+  "idTournament": "TO01",
+  "playerA": {
+    "_id": "PL107",
+    "name": "NADAL Ivana",
+    "ability": 2,
+    "reaction": 4,
+    "isMale": false
+  },
+  "playerB": {
+    "_id": "PL102",
+    "name": "WILLIAMS Gabriela",
+    "ability": 6,
+    "reaction": 4,
+    "isMale": false
+  },
+  "date": {
+    "$date": {
+      "$numberLong": "1667260800000"
+    }
+  },
+  "round": 1,
+  "sets": [
+    {
+      "gamesA": 6,
+      "gamesB": 1
+    },
+    {
+      "gamesA": 6,
+      "gamesB": 4
+    }
+  ],
+  "absentA": false,
+  "absentB": false,
+  "_class": "com.tenistournement.model.tournamentModel.Match"
+},{
+  "_id": {
+    "$oid": "630eac05da00264aedb0d89d"
+  },
+  "idTournament": "TO01",
+  "playerA": {
+    "_id": "PL108",
+    "name": "JONES Caroline",
+    "ability": 2,
+    "reaction": 2,
+    "isMale": false
+  },
+  "playerB": {
+    "_id": "PL101",
+    "name": "CASTRO Daniela",
+    "ability": 4,
+    "reaction": 2,
+    "isMale": false
+  },
+  "date": {
+    "$date": {
+      "$numberLong": "1667260800000"
+    }
+  },
+  "round": 1,
+  "sets": [
+    {
+      "gamesA": 4,
+      "gamesB": 6
+    },
+    {
+      "gamesA": 6,
+      "gamesB": 3
+    },
+    {
+      "gamesA": 1,
+      "gamesB": 6
+    }
+  ],
+  "absentA": false,
+  "absentB": false,
+  "_class": "com.tenistournement.model.tournamentModel.Match"
+}]
